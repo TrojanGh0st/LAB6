@@ -58,17 +58,17 @@ int main() {
     // Crear una cuenta bancaria con un saldo de $1000
     CuentaBancaria cuenta(1000);
 
-    // Depositar $500
+    // Depositar S/500
     cuenta.depositar(500);
 
-    // Retirar $200
+    // Retirar S/200
     cuenta.retirar(200);
 
     // Calcular el interés ganado
     double interes = cuenta.calcularInteres();
 
     // Imprimir el interés ganado
-    cout << "Interes ganado: $" << interes << endl;
+    cout << "Interes ganado: S/" << interes << endl;
 
     return 0;
 }
