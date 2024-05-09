@@ -1,6 +1,5 @@
 #include <iostream>
 #include <string>
-#include <algorithm>
 
 using namespace std;
 
@@ -13,24 +12,29 @@ public:
 
 class Grupo {
 public:
-    Alumno alumnos[5];
-    int cantidad = 5;
+    Alumno alumnos[5]; // Vector de objetos Alumno
+    int cantidad = 5; // Miembro estático que define la cantidad de alumnos en el grupo
 
+    // Función para calcular el promedio del grupo
     float promedio_grupo() {
         float suma_promedios = 0.0;
         int cantidad_alumnos_validos = 0;
+        // Iterar sobre los alumnos y sumar sus promedios
         for (int i = 0; i < cantidad; ++i) {
             suma_promedios += alumnos[i].promedio;
             cantidad_alumnos_validos++;
         }
+        // Calcular y devolver el promedio
         if (cantidad_alumnos_validos == 0) {
             return 0;
         }
         return suma_promedios / cantidad_alumnos_validos;
     }
 
+    // Función para encontrar al alumno con el mejor promedio
     Alumno* mejor_promedio() {
         Alumno* mejor_promedio_alumno = &alumnos[0];
+        // Iterar sobre los alumnos para encontrar el mejor promedio
         for (int i = 1; i < cantidad; ++i) {
             if (alumnos[i].promedio > mejor_promedio_alumno->promedio) {
                 mejor_promedio_alumno = &alumnos[i];
@@ -39,10 +43,18 @@ public:
         return mejor_promedio_alumno;
     }
 
+    // Función para ordenar los alumnos por promedio usando el algoritmo de burbuja
     void ordenar_por_promedio() {
-        sort(alumnos, alumnos + cantidad, [](const Alumno& a, const Alumno& b) {
-            return a.promedio < b.promedio;
-        });
+        for (int i = 0; i < cantidad - 1; ++i) {
+            for (int j = 0; j < cantidad - i - 1; ++j) {
+                // Intercambiar los alumnos si el promedio actual es mayor que el siguiente
+                if (alumnos[j].promedio > alumnos[j + 1].promedio) {
+                    Alumno temp = alumnos[j];
+                    alumnos[j] = alumnos[j + 1];
+                    alumnos[j + 1] = temp;
+                }
+            }
+        }
     }
 };
 
