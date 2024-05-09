@@ -1,5 +1,5 @@
 #include <iostream>
-
+using namespace std;
 // Clase que representa un banco y su tasa de interés
 class Banco {
 public:
@@ -68,7 +68,7 @@ int main() {
     double interes = cuenta.calcularInteres();
 
     // Imprimir el interés ganado
-    std::cout << "Interes ganado: $" << interes << "\n";
+    cout << "Interes ganado: $" << interes << endl;
 
     return 0;
 }
