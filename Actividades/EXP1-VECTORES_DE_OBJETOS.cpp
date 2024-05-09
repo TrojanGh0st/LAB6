@@ -1,5 +1,4 @@
 #include <iostream>
-#include <vector>
 
 using namespace std;
 
@@ -7,7 +6,11 @@ class Estudiante {
 public:
     // Constructor de la clase Estudiante
     Estudiante(const string& nombre, float nota1, float nota2, float nota3) 
-        : nombre_(nombre), notas_{nota1, nota2, nota3} {}
+        : nombre_(nombre) {
+        notas_[0] = nota1;
+        notas_[1] = nota2;
+        notas_[2] = nota3;
+    }
 
     // Método para calcular el promedio de notas del estudiante
     float calcularPromedio() const {
@@ -25,11 +28,11 @@ private:
 };
 
 // Función de ordenación personalizada utilizando el método de la burbuja
-void ordenarEstudiantes(vector<Estudiante>& estudiantes) {
-    // Recorremos el vector de estudiantes
-    for (size_t i = 0; i < estudiantes.size(); ++i) {
-        // Recorremos nuevamente el vector para comparar los promedios de cada estudiante con los siguientes
-        for (size_t j = 0; j < estudiantes.size() - 1; ++j) {
+void ordenarEstudiantes(Estudiante estudiantes[], int numEstudiantes) {
+    // Recorremos el array de estudiantes
+    for (int i = 0; i < numEstudiantes; ++i) {
+        // Recorremos nuevamente el array para comparar los promedios de cada estudiante con los siguientes
+        for (int j = 0; j < numEstudiantes - 1; ++j) {
             // Si el promedio del estudiante actual es mayor que el siguiente, intercambiamos los estudiantes
             if (estudiantes[j].calcularPromedio() > estudiantes[j + 1].calcularPromedio()) {
                 swap(estudiantes[j], estudiantes[j + 1]);
@@ -39,20 +42,19 @@ void ordenarEstudiantes(vector<Estudiante>& estudiantes) {
 }
 
 int main() {
-    // Crear un vector de Estudiantes
-    vector<Estudiante> estudiantes;
+    // Crear un array de Estudiantes
+    Estudiante estudiantes[3] = {
+        Estudiante("Miguelito FF", 80, 75, 90),
+        Estudiante("Nylder", 95, 85, 92),
+        Estudiante("Abby", 60, 65, 70)
+    };
 
-    // Llenar el vector con información de estudiantes
-    estudiantes.push_back(Estudiante("Miguelito FF", 80, 75, 90));
-    estudiantes.push_back(Estudiante("Nylder", 95, 85, 92));
-    estudiantes.push_back(Estudiante("Abby", 60, 65, 70));
-
-    // Ordenar el vector por promedio de nota usando la función personalizada
-    ordenarEstudiantes(estudiantes);
+    // Ordenar el array por promedio de nota usando la función personalizada
+    ordenarEstudiantes(estudiantes, 3);
 
     // Imprimir estudiantes con promedio mayor a 80
     cout << "\tEstudiantes con promedio mayor a 80:\n";
-    // Iterar a través del vector de estudiantes
+    // Iterar a través del array de estudiantes
     for (const auto& estudiante : estudiantes) {
         // Verificar si el promedio del estudiante actual es mayor a 80
         if (estudiante.calcularPromedio() > 80) {
